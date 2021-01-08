@@ -165,9 +165,12 @@ def fastest(protocol=None):
     openvpn_connect(fastest_server, protocol)
 
 
-def country_f(country_code, protocol=None):
-    """Connect to the fastest server in a specific country."""
-    logger.debug("Starting fastest country connect")
+def country(country_code, protocol=None, use_fastest=True):
+    """Connect a server in a specific country."""
+    if use_fastest:
+        logger.debug("Starting fastest country connect")
+    else:
+        logger.debug("Starting random country connect")
 
     if not protocol:
         protocol = get_config_value("USER", "default_protocol")
@@ -196,15 +199,25 @@ def country_f(country_code, protocol=None):
         logger.debug("No server in country {0}".format(country_code))
         sys.exit(1)
 
-    fastest_server = get_fastest_server(server_pool)
-    openvpn_connect(fastest_server, protocol)
+    if use_fastest:
+        servername = get_fastest_server(server_pool)["Name"]
+    else:
+        servername = random.choice(server_pool)["Name"]
+
+    openvpn_connect(servername, protocol)
 
 
-def feature_f(feature, protocol=None):
-    """Connect to the fastest server in a specific country."""
-    logger.debug(
-        "Starting fastest feature connect with feature {0}".format(feature)
-    )
+def feature(feature, protocol=None, use_fastest=True):
+    """Connect a server with a specific feature."""
+
+    if use_fastest:
+        logger.debug(
+            "Starting fastest feature connect with feature {0}".format(feature)
+        )
+    else:
+        logger.debug(
+            "Starting random feature connect with feature {0}".format(feature)
+        )
 
     if not protocol:
         protocol = get_config_value("USER", "default_protocol")
@@ -221,8 +234,12 @@ def feature_f(feature, protocol=None):
         print("[!] No servers found with your selection.")
         sys.exit(1)
 
-    fastest_server = get_fastest_server(server_pool)
-    openvpn_connect(fastest_server, protocol)
+    if use_fastest:
+        servername = get_fastest_server(server_pool)["Name"]
+    else:
+        servername = random.choice(server_pool)["Name"]
+
+    openvpn_connect(servername, protocol)
 
 
 def direct(user_input, protocol=None):

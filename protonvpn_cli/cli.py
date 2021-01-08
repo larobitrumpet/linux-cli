@@ -5,11 +5,15 @@ Usage:
     protonvpn init
     protonvpn (c | connect) [<servername>] [-p <protocol>]
     protonvpn (c | connect) [-f | --fastest] [-p <protocol>]
-    protonvpn (c | connect) [--cc <code>] [-p <protocol>]
-    protonvpn (c | connect) [--sc] [-p <protocol>]
-    protonvpn (c | connect) [--p2p] [-p <protocol>]
-    protonvpn (c | connect) [--tor] [-p <protocol>]
     protonvpn (c | connect) [-r | --random] [-p <protocol>]
+    protonvpn (c | connect) [--cc <code>] [-f | --fastest] [-p <protocol>]
+    protonvpn (c | connect) [--cc <code>] [-r | --random] [-p <protocol>]
+    protonvpn (c | connect) [--sc] [-f | --fastest] [-p <protocol>]
+    protonvpn (c | connect) [--sc] [-r | --random] [-p <protocol>]
+    protonvpn (c | connect) [--p2p] [-f | --fastest] [-p <protocol>]
+    protonvpn (c | connect) [--p2p] [-r | --random] [-p <protocol>]
+    protonvpn (c | connect) [--tor] [-f | --fastest] [-p <protocol>]
+    protonvpn (c | connect) [--tor] [-r | --random] [-p <protocol>]
     protonvpn (r | reconnect)
     protonvpn (d | disconnect)
     protonvpn (s | status)
@@ -112,21 +116,26 @@ def cli():
         if protocol is not None and protocol.lower().strip() in ["tcp", "udp"]:
             protocol = protocol.lower().strip()
 
-        if args.get("--random"):
-            connection.random_c(protocol)
-        elif args.get("--fastest"):
-            connection.fastest(protocol)
-        elif args.get("<servername>"):
+        # Variable that determins wether to connect to the fastest server or a random server
+        # True means to use the fastest server, and False means to use a random server
+        # If neither --fastest nor --random is used, defaults to True
+        use_fastest = args.get("--fastest") or not (args.get("--fastest") or args.get("--random"))
+
+        if args.get("<servername>"):
             connection.direct(args.get("<servername>"), protocol)
         elif args.get("--cc") is not None:
-            connection.country_f(args.get("--cc"), protocol)
+            connection.country(args.get("--cc"), protocol, use_fastest)
         # Features: 1: Secure-Core, 2: Tor, 4: P2P
         elif args.get("--p2p"):
-            connection.feature_f(4, protocol)
+            connection.feature(4, protocol, use_fastest)
         elif args.get("--sc"):
-            connection.feature_f(1, protocol)
+            connection.feature(1, protocol, use_fastest)
         elif args.get("--tor"):
-            connection.feature_f(2, protocol)
+            connection.feature(2, protocol, use_fastest)
+        elif args.get("--fastest"):
+            connection.fastest(protocol)
+        elif args.get("--random"):
+            connection.random_c(protocol)
         else:
             connection.dialog()
     elif args.get("l") or args.get("listservers"):
