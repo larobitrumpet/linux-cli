@@ -125,7 +125,7 @@ For updating, you just need to pull the latest version of the repository with gi
 |`protonvpn --version`              | Display version.                                      |
 |`protonvpn --help`                 | Show help message.                                    |
 
-All connect options can be used with the `-p` flag to explicitly specify which transmission protocol is used for that connection (either `udp` or `tcp`).
+All connect options can be used with the `-p` flag to explicitly specify which transmission protocol is used for that connection (either `udp` or `tcp`). All connect options can also use either the `-f` flag or the `-r` flag to specify wether to connect to the fastest server or a random server respectively.
 
 ## Contributing
 

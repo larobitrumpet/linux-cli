@@ -244,7 +244,7 @@ Before you can use ProtonVPN-CLI, you need to initialize it. Run `sudo protonvpn
 |`protonvpn --version`              | Display version.                                      |
 |`protonvpn --help`                 | Show help message.                                    |
 
-All connect options can be used with the `-p` flag to explicitly specify which transmission protocol is used for that connection (either `udp` or `tcp`).
+All connect options can be used with the `-p` flag to explicitly specify which transmission protocol is used for that connection (either `udp` or `tcp`). All connect options can also use either the `-f` flag or the `-r` flag to specify wether to connect to the fastest server or a random server respectively.
 
 ### Command Explanations
 
@@ -283,22 +283,39 @@ You can use the `--random` or `-r` flag to connect to a random server:
 `protonvpn c -r`
 
 There are several other variables to keep in mind when you want to connect to the “fastest” server. You can connect to the fastest server in a country, the fastest Secure Core server, the fastest P2P-enabled server, or the fastest Tor server.
+You can also cannect to a random server in a country, a random Secure Core server, a random P2P-enabled server, or a random Tor server by using the `--random` or `-r`.
 
 Fastest server in a country (replace UK with the code of the desired country, e.g. `US` for USA, `JP` for Japan, `AU` for Australia, etc.):
 
 `protonvpn c --cc UK`
 
+Random server in a country:
+
+`protonvpn c --cc UK --random`
+
 Fastest Secure Core server:
 
 `protonvpn c --sc`
+
+Random Secure Core server:
+
+`protonvpn c --sc --random`
 
 Fastest P2P/torrent server:
 
 `protonvpn c --p2p`
 
+Random P2P/torrent server:
+
+`protonvpn c --p2p --random`
+
 Fastest Tor server:
 
 `protonvpn c --tor`
+
+Random Tor server:
+
+`protonvpn c --tor --random`
 
 All connection methods (except the interactive menu) can be used with the `-p` flag to choose a transmission protocol. Possible values are either `TCP` or `UDP`. If that flag is not used, your connection will use the default transmission protocol you specified during the initialization:
 
