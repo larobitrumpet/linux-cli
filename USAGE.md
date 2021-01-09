@@ -237,6 +237,7 @@ Before you can use ProtonVPN-CLI, you need to initialize it. Run `sudo protonvpn
 |`protonvpn reconnect, r`           | Reconnect or connect to the last server used.         |
 |`protonvpn disconnect, d`          | Disconnect the current session.                       |
 |`protonvpn status, s`              | Print connection status.                              |
+|`protonvpn listservers, l`         | List available servers in alphabetical order.         |
 |`protonvpn configure`              | Change CLI configuration.                             |
 |`protonvpn refresh`                | Refresh OpenVPN configuration and server data.        |
 |`protonvpn examples`               | Print example commands.                               |
@@ -328,6 +329,12 @@ If you want to see the status and information of your current connection, you ca
 `protonvpn s`
 
 ![status-example](resources/images/usage-status-example.png)
+
+If you want to see the available servers, you can use the `listservers` or `l` option to print out all the available servers in alphabetical order.
+
+`protonvpn listservers`
+
+`protonvpn l`
 
 If you want to change the settings you selected during initialization, you can do this with the `configure` option, just follow the prompts to change your username/password, default protocol and so on:
 

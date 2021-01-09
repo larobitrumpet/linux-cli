@@ -37,6 +37,7 @@ Commands:
     r, reconnect        Reconnect to the last server.
     d, disconnect       Disconnect the current session.
     s, status           Show connection status.
+    l, listservers      List available servers in alphabetical order.
     configure           Change ProtonVPN-CLI configuration.
     refresh             Refresh OpenVPN configuration and server data.
     examples            Print some example commands.

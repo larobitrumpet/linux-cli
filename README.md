@@ -118,6 +118,7 @@ For updating, you just need to pull the latest version of the repository with gi
 |`protonvpn reconnect, r`           | Reconnect or connect to the last server used.         |
 |`protonvpn disconnect, d`          | Disconnect the current session.                       |
 |`protonvpn status, s`              | Print connection status.                              |
+|`protonvpn listservers, l`         | List available servers in alphabetical order.         |
 |`protonvpn configure`              | Change CLI configuration.                             |
 |`protonvpn refresh`                | Refresh OpenVPN configuration and server data.        |
 |`protonvpn examples`               | Print example commands.                               |
