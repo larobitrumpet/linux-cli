@@ -13,6 +13,7 @@ Usage:
     protonvpn (r | reconnect)
     protonvpn (d | disconnect)
     protonvpn (s | status)
+    protonvpn (l | listservers)
     protonvpn configure
     protonvpn refresh
     protonvpn examples
@@ -127,6 +128,10 @@ def cli():
             connection.feature_f(2, protocol)
         else:
             connection.dialog()
+    elif args.get("l") or args.get("listservers"):
+        check_root()
+        check_init()
+        connection.list_servers()
     elif args.get("r") or args.get("reconnect"):
         check_root()
         check_init()

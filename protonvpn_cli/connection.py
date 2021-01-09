@@ -436,6 +436,26 @@ def status():
     )
 
 
+def list_servers():
+    """Print available servers."""
+
+    def get_name(serv):
+        """Function used to sort servers in alphabetical order"""
+
+        name = serv["Name"].split("#")
+        num = name[-1].split("-")
+        while len(num[0]) < 2:
+            num[0] = "0" + num[0]
+        name[-1] = "-".join(num)
+        return "#".join(name)
+
+    servers = get_servers()
+    servers.sort(key=get_name)
+
+    for i in range(0, len(servers)):
+        print(servers[i]["Name"])
+
+
 def openvpn_connect(servername, protocol):
     """Connect to VPN Server."""
 
